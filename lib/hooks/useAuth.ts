@@ -14,7 +14,8 @@ export interface UserData {
   isActive: boolean;
   needsApproval: boolean;
   isAdmin?: boolean;
-  package: 'free' | 'basic' | 'allinone' | 'pro' | null;
+  package?: 'free' | 'ai-ads-mastery' | 'premier-pro' | 'graphic-design-101' | 'package-design' | null; // Legacy: single package (deprecated)
+  packages: string[]; // New: array of packages
   packageExpiry?: Date;
   createdAt: Date;
   lastLogin?: Date;
@@ -64,6 +65,14 @@ export function useAuth() {
                 progress: data.progress ? Object.keys(data.progress) : 'No progress'
               });
 
+              // Support both old 'package' (string) and new 'packages' (array) formats
+              let packages = data.packages || [];
+
+              // Migration: If old 'package' exists but 'packages' doesn't, convert it
+              if (data.package && (!data.packages || data.packages.length === 0)) {
+                packages = [data.package];
+              }
+
               setUserData({
                 uid: data.uid,
                 email: data.email,
@@ -73,7 +82,8 @@ export function useAuth() {
                 isActive: data.isActive,
                 needsApproval: data.needsApproval,
                 isAdmin: data.isAdmin,
-                package: data.package,
+                package: data.package, // Keep for backward compatibility
+                packages: packages, // New array format
                 packageExpiry: data.packageExpiry?.toDate(),
                 createdAt: data.createdAt?.toDate(),
                 lastLogin: data.lastLogin?.toDate(),

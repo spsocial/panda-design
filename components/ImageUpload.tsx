@@ -54,9 +54,23 @@ export function ImageUpload({ currentImageUrl, onImageUploaded, folder, label = 
       // Update parent component
       onImageUploaded(downloadUrl);
       setPreviewUrl(downloadUrl);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error uploading image:', error);
-      alert('เกิดข้อผิดพลาดในการอัพโหลดรูปภาพ');
+
+      // Show more specific error messages
+      let errorMessage = 'เกิดข้อผิดพลาดในการอัพโหลดรูปภาพ';
+
+      if (error.code === 'storage/unauthorized') {
+        errorMessage = '❌ ไม่มีสิทธิ์อัพโหลด\n\nกรุณาตรวจสอบ Firebase Storage Rules:\n1. ไปที่ Firebase Console\n2. เลือก Storage → Rules\n3. ตั้งค่าให้ admin อัพโหลดได้';
+      } else if (error.code === 'storage/canceled') {
+        errorMessage = 'การอัพโหลดถูกยกเลิก';
+      } else if (error.code === 'storage/unknown') {
+        errorMessage = 'เกิดข้อผิดพลาดที่ไม่รู้จัก กรุณาลองใหม่อีกครั้ง';
+      } else if (error.message) {
+        errorMessage = `เกิดข้อผิดพลาด: ${error.message}`;
+      }
+
+      alert(errorMessage);
       setPreviewUrl(currentImageUrl || null);
     } finally {
       setUploading(false);

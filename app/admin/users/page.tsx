@@ -10,7 +10,7 @@ import { useAuth } from '@/lib/hooks/useAuth';
 import { ProviderBadge } from '@/components/ProviderBadge';
 import { PackageBadge } from '@/components/PackageBadge';
 import { Search, Edit, Trash2, Users, CheckCircle, XCircle, Crown, Package } from 'lucide-react';
-import { getPackageName } from '@/lib/utils/accessControl';
+import { getPackageName, getPackagesNames } from '@/lib/utils/accessControl';
 
 interface User {
   uid: string;
@@ -19,7 +19,8 @@ interface User {
   photoURL?: string;
   provider: 'email' | 'google';
   isActive: boolean;
-  package: string | null;
+  package?: string | null; // Legacy: single package
+  packages?: string[]; // New: multiple packages
   packageExpiry?: string;
   isAdmin?: boolean;
   createdAt: any;
@@ -36,7 +37,7 @@ export default function UsersPage() {
   const [filterPackage, setFilterPackage] = useState<string>('all');
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [editPackage, setEditPackage] = useState<string>('ai-ads-mastery');
+  const [editPackages, setEditPackages] = useState<string[]>([]); // Changed to array
   const [editActive, setEditActive] = useState(true);
   const [editAdmin, setEditAdmin] = useState(false);
   const [editExpiry, setEditExpiry] = useState<string>('');
@@ -89,9 +90,20 @@ export default function UsersPage() {
     // Filter by package
     if (filterPackage !== 'all') {
       if (filterPackage === 'none') {
-        filtered = filtered.filter((user) => !user.package);
+        // Filter users with no packages
+        filtered = filtered.filter((user) =>
+          (!user.packages || user.packages.length === 0) && !user.package
+        );
       } else {
-        filtered = filtered.filter((user) => user.package === filterPackage);
+        // Filter users who have the selected package (check both old and new format)
+        filtered = filtered.filter((user) => {
+          const userPackages = user.packages && user.packages.length > 0
+            ? user.packages
+            : user.package
+            ? [user.package]
+            : [];
+          return userPackages.includes(filterPackage);
+        });
       }
     }
 
@@ -100,7 +112,15 @@ export default function UsersPage() {
 
   const handleEdit = (user: User) => {
     setSelectedUser(user);
-    setEditPackage(user.package || '');
+
+    // Support both old package (string) and new packages (array)
+    const packages = user.packages && user.packages.length > 0
+      ? user.packages
+      : user.package
+      ? [user.package]
+      : [];
+    setEditPackages(packages);
+
     setEditActive(user.isActive);
     setEditAdmin(user.isAdmin || false);
     setEditExpiry(
@@ -117,7 +137,8 @@ export default function UsersPage() {
     try {
       const userRef = doc(db, 'users', selectedUser.uid);
       await updateDoc(userRef, {
-        package: editPackage || null,
+        packages: editPackages, // Save array of packages
+        package: editPackages.length > 0 ? editPackages[0] : null, // Keep first for backward compatibility
         packageExpiry: editExpiry ? new Date(editExpiry).toISOString() : null,
         isActive: editActive,
         isAdmin: editAdmin,
@@ -175,10 +196,22 @@ export default function UsersPage() {
     };
 
     users.forEach((user) => {
-      if (!user.package) {
+      // Support both old package (string) and new packages (array)
+      const userPackages = user.packages && user.packages.length > 0
+        ? user.packages
+        : user.package
+        ? [user.package]
+        : [];
+
+      if (userPackages.length === 0) {
         stats.none++;
-      } else if (user.package in stats) {
-        stats[user.package as keyof typeof stats]++;
+      } else {
+        // Count each package in user's packages array
+        userPackages.forEach((pkg) => {
+          if (pkg in stats) {
+            stats[pkg as keyof typeof stats]++;
+          }
+        });
       }
     });
 
@@ -253,7 +286,7 @@ export default function UsersPage() {
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-gray-900">
-                    {users.filter((u) => u.package).length}
+                    {users.filter((u) => (u.packages && u.packages.length > 0) || u.package).length}
                   </p>
                   <p className="text-sm text-gray-600">มีแพ็คเกจ</p>
                 </div>
@@ -417,7 +450,18 @@ export default function UsersPage() {
                         </td>
                         <td className="py-3 px-4">
                           <div>
-                            <PackageBadge packageId={user.package} size="sm" />
+                            {/* Display multiple packages */}
+                            {user.packages && user.packages.length > 0 ? (
+                              <div className="flex flex-wrap gap-1">
+                                {user.packages.map((pkg) => (
+                                  <PackageBadge key={pkg} packageId={pkg} size="sm" />
+                                ))}
+                              </div>
+                            ) : user.package ? (
+                              <PackageBadge packageId={user.package} size="sm" />
+                            ) : (
+                              <span className="text-xs text-gray-400">ไม่มีคอร์ส</span>
+                            )}
                             {user.packageExpiry && (
                               <p className="text-xs text-gray-500 mt-1">
                                 หมดอายุ: {new Date(user.packageExpiry).toLocaleDateString('th-TH')}
@@ -495,23 +539,45 @@ export default function UsersPage() {
               </div>
 
               <div className="space-y-4 mb-6">
-                {/* Package */}
+                {/* Packages - Multi-select */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    คอร์ส
+                    คอร์สที่เปิดใช้งาน (เลือกได้หลายคอร์ส)
                   </label>
-                  <select
-                    value={editPackage}
-                    onChange={(e) => setEditPackage(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-                  >
-                    <option value="">ไม่มีคอร์ส</option>
-                    <option value="free">Free (Freemium)</option>
-                    <option value="ai-ads-mastery">AI ADS MASTERY - ฿1,499</option>
-                    <option value="premier-pro">PREMIER PRO - ฿1,499</option>
-                    <option value="graphic-design-101">GRAPHIC DESIGN 101 - ฿3,500</option>
-                    <option value="package-design">PACKAGE DESIGN - ฿4,500</option>
-                  </select>
+                  <div className="space-y-2 p-3 border border-gray-300 rounded-lg bg-gray-50">
+                    {[
+                      { id: 'free', name: 'Free (Freemium)', color: 'bg-blue-100 text-blue-700' },
+                      { id: 'ai-ads-mastery', name: 'AI ADS MASTERY - ฿1,499', color: 'bg-pink-100 text-pink-700' },
+                      { id: 'premier-pro', name: 'PREMIER PRO - ฿1,499', color: 'bg-purple-100 text-purple-700' },
+                      { id: 'graphic-design-101', name: 'GRAPHIC DESIGN 101 - ฿3,500', color: 'bg-green-100 text-green-700' },
+                      { id: 'package-design', name: 'PACKAGE DESIGN - ฿4,500', color: 'bg-orange-100 text-orange-700' },
+                    ].map((pkg) => (
+                      <div key={pkg.id} className="flex items-center gap-3">
+                        <input
+                          type="checkbox"
+                          id={`pkg-${pkg.id}`}
+                          checked={editPackages.includes(pkg.id)}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setEditPackages([...editPackages, pkg.id]);
+                            } else {
+                              setEditPackages(editPackages.filter((p) => p !== pkg.id));
+                            }
+                          }}
+                          className="w-4 h-4 text-purple-600 rounded focus:ring-2 focus:ring-purple-500"
+                        />
+                        <label
+                          htmlFor={`pkg-${pkg.id}`}
+                          className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium cursor-pointer ${pkg.color}`}
+                        >
+                          {pkg.name}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                  {editPackages.length === 0 && (
+                    <p className="text-xs text-red-600 mt-1">⚠️ ผู้ใช้ต้องมีอย่างน้อย 1 คอร์สเพื่อเข้าใช้งานระบบ</p>
+                  )}
                 </div>
 
                 {/* Package Expiry */}
