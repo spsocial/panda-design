@@ -186,15 +186,20 @@ export default function ProfilePage() {
                   <div>
                     <span className="text-gray-600 block mb-2">คอร์สที่เข้าถึงได้:</span>
                     <div className="flex flex-wrap gap-2">
-                      {userData?.packages && userData.packages.length > 0 ? (
-                        userData.packages.map((pkg) => (
-                          <PackageBadge key={pkg} packageId={pkg} size="md" />
-                        ))
-                      ) : userData?.package ? (
-                        <PackageBadge packageId={userData.package} size="md" />
-                      ) : (
-                        <span className="text-sm text-gray-400 py-2">ไม่มีคอร์ส</span>
-                      )}
+                      {(() => {
+                        // กรองค่าว่างออกก่อน
+                        const validPackages = userData?.packages?.filter((pkg) => pkg && pkg.trim() !== '') || [];
+
+                        if (validPackages.length > 0) {
+                          return validPackages.map((pkg) => (
+                            <PackageBadge key={pkg} packageId={pkg} size="md" />
+                          ));
+                        } else if (userData?.package) {
+                          return <PackageBadge packageId={userData.package} size="md" />;
+                        } else {
+                          return <span className="text-sm text-gray-400 py-2">ไม่มีคอร์ส</span>;
+                        }
+                      })()}
                     </div>
                   </div>
 

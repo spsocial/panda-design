@@ -66,15 +66,20 @@ export default function DashboardPage() {
                 <div>
                   <p className="text-sm text-gray-600">คอร์สที่เข้าถึงได้</p>
                   <div className="flex flex-wrap items-center gap-2">
-                    {userData?.packages && userData.packages.length > 0 ? (
-                      userData.packages.map((pkg) => (
-                        <PackageBadge key={pkg} packageId={pkg} size="md" />
-                      ))
-                    ) : userData?.package ? (
-                      <PackageBadge packageId={userData.package} size="md" />
-                    ) : (
-                      <span className="text-sm text-gray-400">ไม่มีคอร์ส</span>
-                    )}
+                    {(() => {
+                      // กรองค่าว่างออกก่อน
+                      const validPackages = userData?.packages?.filter((pkg) => pkg && pkg.trim() !== '') || [];
+
+                      if (validPackages.length > 0) {
+                        return validPackages.map((pkg) => (
+                          <PackageBadge key={pkg} packageId={pkg} size="md" />
+                        ));
+                      } else if (userData?.package) {
+                        return <PackageBadge packageId={userData.package} size="md" />;
+                      } else {
+                        return <span className="text-sm text-gray-400">ไม่มีคอร์ส</span>;
+                      }
+                    })()}
                   </div>
                   {userData?.packageExpiry && (
                     <p className="text-xs text-gray-500 mt-1">
