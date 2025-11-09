@@ -64,15 +64,23 @@ export default function DashboardPage() {
                   <TrendingUp className="w-8 h-8 text-pink-500" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">แพ็คเกจปัจจุบัน</p>
-                  <div className="flex items-center gap-2">
-                    <PackageBadge packageId={userData?.package || null} size="lg" />
-                    {userData?.packageExpiry && (
-                      <span className="text-sm text-gray-500">
-                        (หมดอายุ: {new Date(userData.packageExpiry).toLocaleDateString('th-TH')})
-                      </span>
+                  <p className="text-sm text-gray-600">คอร์สที่เข้าถึงได้</p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {userData?.packages && userData.packages.length > 0 ? (
+                      userData.packages.map((pkg) => (
+                        <PackageBadge key={pkg} packageId={pkg} size="md" />
+                      ))
+                    ) : userData?.package ? (
+                      <PackageBadge packageId={userData.package} size="md" />
+                    ) : (
+                      <span className="text-sm text-gray-400">ไม่มีคอร์ส</span>
                     )}
                   </div>
+                  {userData?.packageExpiry && (
+                    <p className="text-xs text-gray-500 mt-1">
+                      หมดอายุ: {new Date(userData.packageExpiry).toLocaleDateString('th-TH')}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -93,7 +101,7 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              {!userData?.package && (
+              {(!userData?.packages || userData.packages.length === 0) && !userData?.package && (
                 <Link
                   href="/profile"
                   className="btn-primary whitespace-nowrap"

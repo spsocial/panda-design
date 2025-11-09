@@ -10,7 +10,7 @@ import { ProviderBadge } from '@/components/ProviderBadge';
 import { PackageBadge } from '@/components/PackageBadge';
 import { FloatingContactButton } from '@/components/FloatingContactButton';
 import { useAuth } from '@/lib/hooks/useAuth';
-import { getPackageName } from '@/lib/utils/accessControl';
+import { getPackageName, getPackagesNames } from '@/lib/utils/accessControl';
 import {
   User,
   Mail,
@@ -179,13 +179,23 @@ export default function ProfilePage() {
               <div className="card">
                 <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <Award className="w-5 h-5 text-purple-600" />
-                  แพ็คเกจของคุณ
+                  คอร์สเรียนของคุณ
                 </h3>
 
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-600">แพ็คเกจปัจจุบัน:</span>
-                    <PackageBadge packageId={userData?.package || null} size="md" />
+                  <div>
+                    <span className="text-gray-600 block mb-2">คอร์สที่เข้าถึงได้:</span>
+                    <div className="flex flex-wrap gap-2">
+                      {userData?.packages && userData.packages.length > 0 ? (
+                        userData.packages.map((pkg) => (
+                          <PackageBadge key={pkg} packageId={pkg} size="md" />
+                        ))
+                      ) : userData?.package ? (
+                        <PackageBadge packageId={userData.package} size="md" />
+                      ) : (
+                        <span className="text-sm text-gray-400 py-2">ไม่มีคอร์ส</span>
+                      )}
+                    </div>
                   </div>
 
                   {userData?.packageExpiry && (
@@ -213,10 +223,10 @@ export default function ProfilePage() {
                     </span>
                   </div>
 
-                  {!userData?.package && (
+                  {(!userData?.packages || userData.packages.length === 0) && !userData?.package && (
                     <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
                       <p className="text-sm text-yellow-800 mb-2">
-                        คุณยังไม่มีแพ็คเกจ กรุณาติดต่อ Admin เพื่อเลือกแพ็คเกจที่เหมาะสมกับคุณ
+                        คุณยังไม่มีคอร์สเรียน กรุณาติดต่อ Admin เพื่อเลือกคอร์สที่เหมาะสมกับคุณ
                       </p>
                       <a
                         href="https://m.me/719837687869400"
@@ -225,38 +235,19 @@ export default function ProfilePage() {
                         className="inline-flex items-center gap-2 text-sm bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors font-medium"
                       >
                         <MessageCircle className="w-4 h-4" />
-                        ติดต่อ Admin เพื่อสมัครแพ็คเกจ
+                        ติดต่อ Admin เพื่อสมัครคอร์ส
                       </a>
                     </div>
                   )}
 
-                  {userData?.package && (
+                  {((userData?.packages && userData.packages.length > 0) || userData?.package) && (
                     <div className="mt-4 p-4 bg-purple-50 border border-purple-200 rounded-lg">
                       <p className="text-sm text-purple-800 mb-2 font-medium">
-                        สิทธิประโยชน์ของ {getPackageName(userData.package)}:
+                        ✨ คุณสามารถเข้าเรียนคอร์สต่างๆ ที่ปลดล็อคไว้ได้เลย!
                       </p>
-                      <ul className="text-sm text-purple-700 space-y-1">
-                        {userData.package === 'basic' && (
-                          <>
-                            <li>✓ สร้างวิดีโอโฆษณาด้วย AI</li>
-                            <li>✓ เครื่องมือ: ChatGPT, Midjourney, Heygen</li>
-                          </>
-                        )}
-                        {userData.package === 'allinone' && (
-                          <>
-                            <li>✓ เข้าถึงคอร์สทั้งหมด</li>
-                            <li>✓ สร้างวิดีโอโฆษณา, ออกแบบ Product, TikTok Viral</li>
-                            <li>✓ เครื่องมือครบชุด</li>
-                          </>
-                        )}
-                        {userData.package === 'pro' && (
-                          <>
-                            <li>✓ เข้าถึงทุกคอร์ส + Advanced Content</li>
-                            <li>✓ สร้างเว็บไซต์และ Automation</li>
-                            <li>✓ เครื่องมือ Premium ทั้งหมด</li>
-                          </>
-                        )}
-                      </ul>
+                      <p className="text-sm text-purple-700">
+                        ติดตามเนื้อหาและคลิปใหม่ๆ ได้ที่หน้า "มีอะไรใหม่" 🎯
+                      </p>
                     </div>
                   )}
                 </div>

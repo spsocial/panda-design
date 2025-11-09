@@ -10,7 +10,10 @@ export function FloatingContactButton() {
       href={lineUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-pink-400 to-pink-600 text-white p-4 rounded-full shadow-2xl hover:shadow-pink-500/50 hover:scale-110 transition-all duration-300 group animate-bounce"
+      className="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-pink-400 to-pink-600 text-white p-4 rounded-full shadow-2xl hover:shadow-pink-500/50 hover:scale-110 transition-all duration-300 group"
+      style={{
+        animation: 'gentle-bounce 3s ease-in-out infinite'
+      }}
       title="ติดต่อ Admin"
     >
       <MessageCircle className="w-7 h-7" />
@@ -23,8 +26,20 @@ export function FloatingContactButton() {
         </div>
       </div>
 
-      {/* Pulse animation */}
-      <div className="absolute inset-0 rounded-full bg-pink-500 animate-ping opacity-20"></div>
+      {/* Pulse animation - เบาลง */}
+      <div className="absolute inset-0 rounded-full bg-pink-500 animate-ping opacity-10"></div>
+
+      {/* Custom gentle bounce animation */}
+      <style jsx>{`
+        @keyframes gentle-bounce {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-8px);
+          }
+        }
+      `}</style>
     </a>
   );
 }
