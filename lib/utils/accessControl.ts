@@ -11,9 +11,10 @@ export function canAccessContent(
 
   const hierarchy: Record<string, number> = {
     free: 0,
-    basic: 1,
-    allinone: 2,
-    pro: 3,
+    'ai-ads-mastery': 1,
+    'premier-pro': 2,
+    'graphic-design-101': 3,
+    'package-design': 4,
   };
 
   return hierarchy[userPackage] >= hierarchy[requiredPackage];
@@ -53,9 +54,10 @@ export function isAdmin(userData: UserData | null): boolean {
 export function getPackageName(packageId: string | null): string {
   const packageNames: Record<string, string> = {
     free: 'Free',
-    basic: 'โฆษณาโปร',
-    allinone: 'All-in-One',
-    pro: 'Pro Developer',
+    'ai-ads-mastery': 'AI ADS MASTERY',
+    'premier-pro': 'PREMIER PRO',
+    'graphic-design-101': 'GRAPHIC DESIGN 101',
+    'package-design': 'PACKAGE DESIGN',
   };
 
   return packageId ? packageNames[packageId] || 'ไม่มีแพ็คเกจ' : 'ไม่มีแพ็คเกจ';

@@ -36,7 +36,7 @@ export default function UsersPage() {
   const [filterPackage, setFilterPackage] = useState<string>('all');
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [editPackage, setEditPackage] = useState<string>('basic');
+  const [editPackage, setEditPackage] = useState<string>('ai-ads-mastery');
   const [editActive, setEditActive] = useState(true);
   const [editAdmin, setEditAdmin] = useState(false);
   const [editExpiry, setEditExpiry] = useState<string>('');
@@ -167,9 +167,10 @@ export default function UsersPage() {
   const getPackageStats = () => {
     const stats = {
       free: 0,
-      basic: 0,
-      allinone: 0,
-      pro: 0,
+      'ai-ads-mastery': 0,
+      'premier-pro': 0,
+      'graphic-design-101': 0,
+      'package-design': 0,
       none: 0,
     };
 
@@ -278,28 +279,32 @@ export default function UsersPage() {
           <div className="card mb-6">
             <div className="flex items-center gap-2 mb-4">
               <Package className="w-5 h-5 text-purple-600" />
-              <h2 className="text-lg font-bold text-gray-900">สถิติแพ็กเกจ</h2>
+              <h2 className="text-lg font-bold text-gray-900">สถิติคอร์ส</h2>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               <div className="text-center p-3 bg-gray-50 rounded-lg border border-gray-200">
                 <p className="text-xl font-bold text-gray-900">{packageStats.none}</p>
-                <p className="text-xs text-gray-600 mt-1">ไม่มีแพ็กเกจ</p>
+                <p className="text-xs text-gray-600 mt-1">ไม่มีคอร์ส</p>
               </div>
               <div className="text-center p-3 bg-blue-50 rounded-lg border border-blue-200">
                 <p className="text-xl font-bold text-blue-600">{packageStats.free}</p>
                 <p className="text-xs text-gray-600 mt-1">Free</p>
               </div>
-              <div className="text-center p-3 bg-green-50 rounded-lg border border-green-200">
-                <p className="text-xl font-bold text-green-600">{packageStats.basic}</p>
-                <p className="text-xs text-gray-600 mt-1">Basic</p>
-              </div>
-              <div className="text-center p-3 bg-orange-50 rounded-lg border border-orange-200">
-                <p className="text-xl font-bold text-orange-600">{packageStats.allinone}</p>
-                <p className="text-xs text-gray-600 mt-1">All-in-One</p>
+              <div className="text-center p-3 bg-pink-50 rounded-lg border border-pink-200">
+                <p className="text-xl font-bold text-pink-600">{packageStats['ai-ads-mastery']}</p>
+                <p className="text-xs text-gray-600 mt-1">AI ADS</p>
               </div>
               <div className="text-center p-3 bg-purple-50 rounded-lg border border-purple-200">
-                <p className="text-xl font-bold text-purple-600">{packageStats.pro}</p>
-                <p className="text-xs text-gray-600 mt-1">Pro</p>
+                <p className="text-xl font-bold text-purple-600">{packageStats['premier-pro']}</p>
+                <p className="text-xs text-gray-600 mt-1">PREMIER</p>
+              </div>
+              <div className="text-center p-3 bg-green-50 rounded-lg border border-green-200">
+                <p className="text-xl font-bold text-green-600">{packageStats['graphic-design-101']}</p>
+                <p className="text-xs text-gray-600 mt-1">GRAPHIC</p>
+              </div>
+              <div className="text-center p-3 bg-orange-50 rounded-lg border border-orange-200">
+                <p className="text-xl font-bold text-orange-600">{packageStats['package-design']}</p>
+                <p className="text-xs text-gray-600 mt-1">PACKAGE</p>
               </div>
             </div>
           </div>
@@ -338,12 +343,13 @@ export default function UsersPage() {
                 onChange={(e) => setFilterPackage(e.target.value)}
                 className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent outline-none"
               >
-                <option value="all">แพ็กเกจ: ทั้งหมด</option>
-                <option value="none">ไม่มีแพ็กเกจ ({packageStats.none})</option>
+                <option value="all">คอร์ส: ทั้งหมด</option>
+                <option value="none">ไม่มีคอร์ส ({packageStats.none})</option>
                 <option value="free">Free ({packageStats.free})</option>
-                <option value="basic">Basic ({packageStats.basic})</option>
-                <option value="allinone">All-in-One ({packageStats.allinone})</option>
-                <option value="pro">Pro ({packageStats.pro})</option>
+                <option value="ai-ads-mastery">AI ADS MASTERY ({packageStats['ai-ads-mastery']})</option>
+                <option value="premier-pro">PREMIER PRO ({packageStats['premier-pro']})</option>
+                <option value="graphic-design-101">GRAPHIC DESIGN 101 ({packageStats['graphic-design-101']})</option>
+                <option value="package-design">PACKAGE DESIGN ({packageStats['package-design']})</option>
               </select>
             </div>
             <p className="text-sm text-gray-500 mt-3">
@@ -492,18 +498,19 @@ export default function UsersPage() {
                 {/* Package */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    แพ็คเกจ
+                    คอร์ส
                   </label>
                   <select
                     value={editPackage}
                     onChange={(e) => setEditPackage(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
                   >
-                    <option value="">ไม่มีแพ็คเกจ</option>
+                    <option value="">ไม่มีคอร์ส</option>
                     <option value="free">Free (Freemium)</option>
-                    <option value="basic">Basic</option>
-                    <option value="allinone">All-in-One</option>
-                    <option value="pro">Pro</option>
+                    <option value="ai-ads-mastery">AI ADS MASTERY - ฿1,499</option>
+                    <option value="premier-pro">PREMIER PRO - ฿1,499</option>
+                    <option value="graphic-design-101">GRAPHIC DESIGN 101 - ฿3,500</option>
+                    <option value="package-design">PACKAGE DESIGN - ฿4,500</option>
                   </select>
                 </div>
 

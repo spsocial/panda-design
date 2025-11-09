@@ -36,7 +36,7 @@ export default function EditAIToolPage({ params }: { params: { id: string } }) {
   const [folder, setFolder] = useState('');
   const [icon, setIcon] = useState('🤖');
   const [imageUrl, setImageUrl] = useState('');
-  const [requiredPackage, setRequiredPackage] = useState<'free' | 'basic' | 'allinone' | 'pro'>('free');
+  const [requiredPackage, setRequiredPackage] = useState<'free' | 'ai-ads-mastery' | 'premier-pro' | 'graphic-design-101' | 'package-design'>('free');
   const [order, setOrder] = useState(0);
 
   // Videos
@@ -302,9 +302,10 @@ export default function EditAIToolPage({ params }: { params: { id: string } }) {
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
                   >
                     <option value="free">Free (ดูได้ฟรี)</option>
-                    <option value="basic">Basic</option>
-                    <option value="allinone">All-in-One</option>
-                    <option value="pro">Pro</option>
+                    <option value="ai-ads-mastery">AI ADS MASTERY (฿1,499)</option>
+                    <option value="premier-pro">PREMIER PRO (฿1,499)</option>
+                    <option value="graphic-design-101">GRAPHIC DESIGN 101 (฿3,500)</option>
+                    <option value="package-design">PACKAGE DESIGN (฿4,500)</option>
                   </select>
                 </div>
 

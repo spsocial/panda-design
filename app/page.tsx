@@ -131,86 +131,106 @@ export default function Home() {
       {/* Pricing Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">แพ็คเกจเรียน</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Basic Package */}
+          <h2 className="text-3xl font-bold text-center mb-12">คอร์สเรียน</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* AI ADS MASTERY */}
             <div className="card hover:shadow-2xl">
-              <h3 className="text-2xl font-bold mb-2">Starter</h3>
-              <div className="text-3xl font-bold text-pink-500 mb-4">
-                ฿499
-              </div>
-              <ul className="space-y-2 mb-6">
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span>
-                  <span>พื้นฐาน Photoshop</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span>
-                  <span>พื้นฐาน Premiere Pro</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span>
-                  <span>เทคนิคตัดต่อพื้นฐาน</span>
-                </li>
-              </ul>
-              <Link href="/login" className="btn-primary w-full block text-center">เลือกแพ็คเกจนี้</Link>
-            </div>
-
-            {/* All-in-One Package */}
-            <div className="card hover:shadow-2xl border-pink-300 relative">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-pink-400 to-pink-500 text-white px-4 py-1 rounded-full text-sm font-bold">
-                แนะนำ
-              </div>
-              <h3 className="text-2xl font-bold mb-2">Professional</h3>
-              <div className="text-3xl font-bold text-pink-500 mb-4">
-                ฿999
-              </div>
-              <ul className="space-y-2 mb-6">
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span>
-                  <span>ทุกอย่างในแพ็คเกจ Starter</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span>
-                  <span>Illustrator เต็มรูปแบบ</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span>
-                  <span>After Effects และ Motion Graphics</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span>
-                  <span>เทคนิคขั้นสูงและ Portfolio</span>
-                </li>
-              </ul>
-              <Link href="/login" className="btn-primary w-full block text-center">เลือกแพ็คเกจนี้</Link>
-            </div>
-
-            {/* Pro Package */}
-            <div className="card hover:shadow-2xl">
-              <h3 className="text-2xl font-bold mb-2">Expert</h3>
+              <div className="text-4xl mb-4">🎯</div>
+              <h3 className="text-xl font-bold mb-2">AI ADS MASTERY</h3>
               <div className="text-3xl font-bold text-pink-500 mb-4">
                 ฿1,499
               </div>
               <ul className="space-y-2 mb-6">
                 <li className="flex items-center gap-2">
                   <span className="text-green-500">✓</span>
-                  <span>ทุกอย่างใน Professional</span>
+                  <span className="text-sm">เทคนิคโฆษณาด้วย AI</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-green-500">✓</span>
-                  <span>3D Design และ Cinema 4D</span>
+                  <span className="text-sm">สร้างคอนเทนต์โฆษณา</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-green-500">✓</span>
-                  <span>Color Grading ขั้นสูง</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span>
-                  <span>ปรึกษางานส่วนตัว 1-on-1</span>
+                  <span className="text-sm">วิเคราะห์ตลาด</span>
                 </li>
               </ul>
-              <button className="btn-secondary w-full">เร็วๆ นี้</button>
+              <Link href="/login" className="btn-primary w-full block text-center">เลือกคอร์สนี้</Link>
+            </div>
+
+            {/* PREMIER PRO */}
+            <div className="card hover:shadow-2xl">
+              <div className="text-4xl mb-4">🎬</div>
+              <h3 className="text-xl font-bold mb-2">PREMIER PRO</h3>
+              <p className="text-sm text-gray-600 mb-3">(ตัดต่อวิดีโอ)</p>
+              <div className="text-3xl font-bold text-pink-500 mb-4">
+                ฿1,499
+              </div>
+              <ul className="space-y-2 mb-6">
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500">✓</span>
+                  <span className="text-sm">ตัดต่อวิดีโอมืออาชีพ</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500">✓</span>
+                  <span className="text-sm">Color Grading</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500">✓</span>
+                  <span className="text-sm">Motion Graphics</span>
+                </li>
+              </ul>
+              <Link href="/login" className="btn-primary w-full block text-center">เลือกคอร์สนี้</Link>
+            </div>
+
+            {/* GRAPHIC DESIGN 101 */}
+            <div className="card hover:shadow-2xl border-pink-300 relative">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-pink-400 to-pink-500 text-white px-4 py-1 rounded-full text-sm font-bold">
+                แนะนำ
+              </div>
+              <div className="text-4xl mb-4">🎨</div>
+              <h3 className="text-xl font-bold mb-2">GRAPHIC DESIGN 101</h3>
+              <div className="text-3xl font-bold text-pink-500 mb-4">
+                ฿3,500
+              </div>
+              <ul className="space-y-2 mb-6">
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500">✓</span>
+                  <span className="text-sm">Photoshop เต็มรูปแบบ</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500">✓</span>
+                  <span className="text-sm">Illustrator มืออาชีพ</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500">✓</span>
+                  <span className="text-sm">หลักการออกแบบ</span>
+                </li>
+              </ul>
+              <Link href="/login" className="btn-primary w-full block text-center">เลือกคอร์สนี้</Link>
+            </div>
+
+            {/* PACKAGE DESIGN */}
+            <div className="card hover:shadow-2xl">
+              <div className="text-4xl mb-4">📦</div>
+              <h3 className="text-xl font-bold mb-2">PACKAGE DESIGN</h3>
+              <div className="text-3xl font-bold text-pink-500 mb-4">
+                ฿4,500
+              </div>
+              <ul className="space-y-2 mb-6">
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500">✓</span>
+                  <span className="text-sm">ออกแบบบรรจุภัณฑ์</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500">✓</span>
+                  <span className="text-sm">3D Mockup</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500">✓</span>
+                  <span className="text-sm">Print Production</span>
+                </li>
+              </ul>
+              <Link href="/login" className="btn-primary w-full block text-center">เลือกคอร์สนี้</Link>
             </div>
           </div>
         </div>
