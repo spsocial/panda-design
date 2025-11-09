@@ -114,11 +114,13 @@ export default function UsersPage() {
     setSelectedUser(user);
 
     // Support both old package (string) and new packages (array)
-    const packages = user.packages && user.packages.length > 0
-      ? user.packages
+    // กรองค่าว่างออกด้วย
+    let packages = user.packages && user.packages.length > 0
+      ? user.packages.filter((pkg) => pkg && pkg.trim() !== '')
       : user.package
       ? [user.package]
       : [];
+
     setEditPackages(packages);
 
     setEditActive(user.isActive);
@@ -135,10 +137,13 @@ export default function UsersPage() {
     if (!selectedUser) return;
 
     try {
+      // กรองค่าว่างออกก่อน save
+      const validPackages = editPackages.filter((pkg) => pkg && pkg.trim() !== '');
+
       const userRef = doc(db, 'users', selectedUser.uid);
       await updateDoc(userRef, {
-        packages: editPackages, // Save array of packages
-        package: editPackages.length > 0 ? editPackages[0] : null, // Keep first for backward compatibility
+        packages: validPackages, // Save array of packages (ที่กรองแล้ว)
+        package: validPackages.length > 0 ? validPackages[0] : null, // Keep first for backward compatibility
         packageExpiry: editExpiry ? new Date(editExpiry).toISOString() : null,
         isActive: editActive,
         isAdmin: editAdmin,
