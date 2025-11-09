@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { Palette, Search, LogOut, User, Settings, Sparkles } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -63,7 +64,13 @@ export function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/dashboard" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <span className="text-3xl">🐼</span>
+            <Image
+              src="/panda-logo.avif"
+              alt="Panda Design Logo"
+              width={40}
+              height={40}
+              className="object-contain"
+            />
             <span className="text-xl font-bold bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">
               PANDA DESIGN
             </span>

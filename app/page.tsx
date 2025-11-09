@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Palette } from 'lucide-react'
 
 export default function Home() {
@@ -9,7 +10,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-2">
-              <span className="text-3xl">🐼</span>
+              <Image
+                src="/panda-logo.avif"
+                alt="Panda Design Logo"
+                width={40}
+                height={40}
+                className="object-contain"
+              />
               <span className="text-xl font-bold bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">
                 PANDA DESIGN
               </span>
@@ -240,7 +247,13 @@ export default function Home() {
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <span className="text-2xl">🐼</span>
+            <Image
+              src="/panda-logo.avif"
+              alt="Panda Design Logo"
+              width={32}
+              height={32}
+              className="object-contain"
+            />
             <span className="text-xl font-bold">PANDA DESIGN</span>
           </div>
           <p className="text-gray-400">
