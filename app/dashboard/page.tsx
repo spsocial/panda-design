@@ -107,7 +107,7 @@ export default function DashboardPage() {
 
         {/* Content Area */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-          <AIToolsTab userPackage={userData?.package || null} />
+          <AIToolsTab userPackages={userData?.packages || null} />
         </div>
       </div>
     </ProtectedRoute>
@@ -115,7 +115,7 @@ export default function DashboardPage() {
 }
 
 // AI Tools Tab Component
-function AIToolsTab({ userPackage }: { userPackage: string | null }) {
+function AIToolsTab({ userPackages }: { userPackages: string[] | null }) {
   const { tools, loading } = useAITools();
   const { userData } = useAuth();
   const searchParams = useSearchParams();
@@ -172,7 +172,7 @@ function AIToolsTab({ userPackage }: { userPackage: string | null }) {
       {filteredTools.length > 0 && (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredTools.map((tool) => {
-            const hasAccess = canAccessContent(userPackage, tool.requiredPackage);
+            const hasAccess = canAccessContent(userPackages, tool.requiredPackage);
             const sanitizedToolId = tool.id.replace(/\./g, '_');
             const toolProgress = userData?.progress?.[sanitizedToolId];
 

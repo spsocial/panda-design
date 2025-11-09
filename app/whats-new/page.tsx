@@ -160,7 +160,7 @@ export default function WhatsNewPage() {
               {/* Notification List */}
               <div className="space-y-4">
                 {updates.map((update) => {
-                  const hasAccess = canAccessContent(userData?.package || null, update.requiredPackage);
+                  const hasAccess = canAccessContent(userData?.packages || null, update.requiredPackage);
 
                   return (
                     <Link

@@ -112,7 +112,7 @@ export default function AIToolDetailPage() {
     );
   }
 
-  const hasAccess = canAccessContent(userData?.package || null, tool.requiredPackage);
+  const hasAccess = canAccessContent(userData?.packages || null, tool.requiredPackage);
   // ✅ แปลง dot (.) เป็น underscore (_) เพื่อป้องกัน Firebase nested structure
   const sanitizedToolId = toolId.replace(/\./g, '_');
   const progress = userData?.progress?.[sanitizedToolId];
