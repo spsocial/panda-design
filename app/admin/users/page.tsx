@@ -192,7 +192,6 @@ export default function UsersPage() {
   // Package statistics
   const getPackageStats = () => {
     const stats = {
-      free: 0,
       'ai-ads-mastery': 0,
       'premier-pro': 0,
       'graphic-design-101': 0,
@@ -319,14 +318,10 @@ export default function UsersPage() {
               <Package className="w-5 h-5 text-purple-600" />
               <h2 className="text-lg font-bold text-gray-900">สถิติคอร์ส</h2>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               <div className="text-center p-3 bg-gray-50 rounded-lg border border-gray-200">
                 <p className="text-xl font-bold text-gray-900">{packageStats.none}</p>
                 <p className="text-xs text-gray-600 mt-1">ไม่มีคอร์ส</p>
-              </div>
-              <div className="text-center p-3 bg-blue-50 rounded-lg border border-blue-200">
-                <p className="text-xl font-bold text-blue-600">{packageStats.free}</p>
-                <p className="text-xs text-gray-600 mt-1">Free</p>
               </div>
               <div className="text-center p-3 bg-pink-50 rounded-lg border border-pink-200">
                 <p className="text-xl font-bold text-pink-600">{packageStats['ai-ads-mastery']}</p>
@@ -383,7 +378,6 @@ export default function UsersPage() {
               >
                 <option value="all">คอร์ส: ทั้งหมด</option>
                 <option value="none">ไม่มีคอร์ส ({packageStats.none})</option>
-                <option value="free">Free ({packageStats.free})</option>
                 <option value="ai-ads-mastery">AI ADS MASTERY ({packageStats['ai-ads-mastery']})</option>
                 <option value="premier-pro">PREMIER PRO ({packageStats['premier-pro']})</option>
                 <option value="graphic-design-101">GRAPHIC DESIGN 101 ({packageStats['graphic-design-101']})</option>
@@ -551,7 +545,6 @@ export default function UsersPage() {
                   </label>
                   <div className="space-y-2 p-3 border border-gray-300 rounded-lg bg-gray-50">
                     {[
-                      { id: 'free', name: 'Free (Freemium)', color: 'bg-blue-100 text-blue-700' },
                       { id: 'ai-ads-mastery', name: 'AI ADS MASTERY - ฿1,499', color: 'bg-pink-100 text-pink-700' },
                       { id: 'premier-pro', name: 'PREMIER PRO - ฿1,499', color: 'bg-purple-100 text-purple-700' },
                       { id: 'graphic-design-101', name: 'GRAPHIC DESIGN 101 - ฿3,500', color: 'bg-green-100 text-green-700' },

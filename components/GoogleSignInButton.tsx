@@ -24,17 +24,18 @@ export function GoogleSignInButton() {
       const userDoc = await getDoc(userRef);
 
       if (!userDoc.exists()) {
-        // New user - create document with free package (Freemium model)
+        // New user - create document without package (needs admin approval)
         await setDoc(userRef, {
           uid: user.uid,
           email: user.email,
           displayName: user.displayName || 'ผู้ใช้ Google',
           photoURL: user.photoURL,
           provider: 'google',
-          isActive: true, // Auto-activated with free package
-          needsApproval: false,
+          isActive: false, // Needs admin approval
+          needsApproval: true,
           isAdmin: false,
-          package: 'free', // Start with free package, can upgrade later
+          package: null, // No package until admin assigns
+          packages: [], // Empty packages array
           createdAt: new Date(),
           lastLogin: new Date(),
           progress: {},

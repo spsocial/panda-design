@@ -18,7 +18,7 @@ export function canAccessContent(
   if (packages.length === 0) return false;
 
   // Check if user has the required package in their packages array
-  return packages.includes(requiredPackage) || packages.includes('free');
+  return packages.includes(requiredPackage);
 }
 
 /**
@@ -55,7 +55,6 @@ export function isAdmin(userData: UserData | null): boolean {
  */
 export function getPackageName(packageId: string | null): string {
   const packageNames: Record<string, string> = {
-    free: 'Free',
     'ai-ads-mastery': 'AI ADS MASTERY',
     'premier-pro': 'PREMIER PRO',
     'graphic-design-101': 'GRAPHIC DESIGN 101',
@@ -72,7 +71,6 @@ export function getPackagesNames(packages: string[] | null): string[] {
   if (!packages || packages.length === 0) return [];
 
   const packageNames: Record<string, string> = {
-    free: 'Free',
     'ai-ads-mastery': 'AI ADS MASTERY',
     'premier-pro': 'PREMIER PRO',
     'graphic-design-101': 'GRAPHIC DESIGN 101',
