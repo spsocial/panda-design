@@ -145,7 +145,6 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* AI ADS MASTERY */}
             <div className="card hover:shadow-2xl">
-              <div className="text-4xl mb-4">🎯</div>
               <h3 className="text-xl font-bold mb-2">AI ADS MASTERY</h3>
               <div className="text-3xl font-bold text-pink-500 mb-4">
                 ฿1,499
@@ -169,7 +168,6 @@ export default function Home() {
 
             {/* PREMIER PRO */}
             <div className="card hover:shadow-2xl">
-              <div className="text-4xl mb-4">🎬</div>
               <h3 className="text-xl font-bold mb-2">PREMIER PRO</h3>
               <p className="text-sm text-gray-600 mb-3">(ตัดต่อวิดีโอ)</p>
               <div className="text-3xl font-bold text-pink-500 mb-4">
@@ -197,7 +195,6 @@ export default function Home() {
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-pink-400 to-pink-500 text-white px-4 py-1 rounded-full text-sm font-bold">
                 แนะนำ
               </div>
-              <div className="text-4xl mb-4">🎨</div>
               <h3 className="text-xl font-bold mb-2">GRAPHIC DESIGN 101</h3>
               <div className="text-3xl font-bold text-pink-500 mb-4">
                 ฿3,500
@@ -221,7 +218,6 @@ export default function Home() {
 
             {/* PACKAGE DESIGN */}
             <div className="card hover:shadow-2xl">
-              <div className="text-4xl mb-4">📦</div>
               <h3 className="text-xl font-bold mb-2">PACKAGE DESIGN</h3>
               <div className="text-3xl font-bold text-pink-500 mb-4">
                 ฿4,500
