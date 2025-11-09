@@ -54,7 +54,7 @@ export default function EditAIToolPage({ params }: { params: { id: string } }) {
       const toolSnap = await getDoc(toolRef);
 
       if (!toolSnap.exists()) {
-        alert('❌ ไม่พบ AI Tool นี้');
+        alert('❌ ไม่พบคอร์สนี้');
         router.push('/admin/ai-tools');
         return;
       }
@@ -161,12 +161,12 @@ export default function EditAIToolPage({ params }: { params: { id: string } }) {
         }))
       };
 
-      console.log('💾 Updating AI Tool:', toolData);
+      console.log('💾 Updating Course:', toolData);
 
       const toolRef = doc(db, 'aiTools', toolId);
       await updateDoc(toolRef, toolData);
 
-      alert('✅ อัปเดต AI Tool เรียบร้อยแล้ว!');
+      alert('✅ อัปเดตคอร์สเรียบร้อยแล้ว!');
       router.push('/admin/ai-tools');
     } catch (error: any) {
       console.error('❌ Error updating:', error);
@@ -215,15 +215,15 @@ export default function EditAIToolPage({ params }: { params: { id: string } }) {
             className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 hover:underline"
           >
             <ArrowLeft className="w-5 h-5" />
-            กลับไปหน้า AI Tools
+            กลับไปหน้าจัดการคอร์ส
           </Link>
 
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              ✏️ แก้ไข AI Tool: {name}
+              ✏️ แก้ไขคอร์ส: {name}
             </h1>
             <p className="text-gray-600">
-              อัปเดตข้อมูล AI Tool และวิดีโอ
+              อัปเดตข้อมูลคอร์สและวิดีโอ
             </p>
           </div>
 
@@ -237,14 +237,14 @@ export default function EditAIToolPage({ params }: { params: { id: string } }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    ชื่อ AI Tool *
+                    ชื่อคอร์สเรียน *
                   </label>
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-                    placeholder="เช่น ChatGPT"
+                    placeholder="เช่น Photoshop"
                     required
                   />
                 </div>
@@ -271,7 +271,7 @@ export default function EditAIToolPage({ params }: { params: { id: string } }) {
                     onChange={(e) => setDescription(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
                     rows={3}
-                    placeholder="อธิบาย AI Tool นี้..."
+                    placeholder="อธิบายคอร์สนี้..."
                     required
                   />
                 </div>
@@ -331,7 +331,7 @@ export default function EditAIToolPage({ params }: { params: { id: string } }) {
                     currentImageUrl={imageUrl}
                     onImageUploaded={(url) => setImageUrl(url)}
                     folder="tools"
-                    label="รูปภาพ AI Tool (แนะนำ 1200×900 px)"
+                    label="รูปภาพคอร์ส (แนะนำ 1200×900 px)"
                   />
                 </div>
               </div>

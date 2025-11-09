@@ -91,11 +91,11 @@ export default function AdminAIToolsPage() {
   };
 
   const handleDelete = async (toolId: string, toolName: string) => {
-    if (!confirm(`คุณแน่ใจหรือไม่ที่จะลบ "${toolName}"?\n\nการลบจะส่งผลกระทบต่อ Learning Paths ที่ใช้ Tool นี้!`)) return;
+    if (!confirm(`คุณแน่ใจหรือไม่ที่จะลบ "${toolName}"?\n\nการลบจะทำให้ผู้ใช้ไม่สามารถเข้าถึงคอร์สนี้ได้อีกต่อไป!`)) return;
 
     try {
       await deleteDoc(doc(db, 'aiTools', toolId));
-      alert('✅ ลบ AI Tool เรียบร้อยแล้ว!');
+      alert('✅ ลบคอร์สเรียบร้อยแล้ว!');
       loadTools();
     } catch (error) {
       console.error('Error deleting tool:', error);
@@ -183,10 +183,10 @@ export default function AdminAIToolsPage() {
           <div className="flex items-center justify-between mb-8">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                🛠️ จัดการ AI Tools
+                🛠️ จัดการคอร์สเรียน
               </h1>
               <p className="text-gray-600">
-                เพิ่ม แก้ไข หรือลบ AI Tools และวิดีโอ
+                เพิ่ม แก้ไข หรือลบคอร์สเรียนและวิดีโอ
               </p>
             </div>
             <Link
@@ -194,7 +194,7 @@ export default function AdminAIToolsPage() {
               className="btn-primary flex items-center gap-2"
             >
               <Plus className="w-5 h-5" />
-              เพิ่ม AI Tool
+              เพิ่มคอร์สเรียน
             </Link>
           </div>
 
@@ -246,7 +246,7 @@ export default function AdminAIToolsPage() {
                 <div className="relative">
                   <input
                     type="text"
-                    placeholder="ค้นหา AI Tool..."
+                    placeholder="ค้นหาคอร์สเรียน..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent outline-none"
@@ -294,12 +294,12 @@ export default function AdminAIToolsPage() {
             <div className="text-center py-12 card">
               <Wrench className="w-16 h-16 mx-auto text-gray-400 mb-4" />
               <h3 className="text-xl font-bold text-gray-900 mb-2">
-                {searchTerm || filterPackage !== 'all' ? 'ไม่พบ AI Tool ที่ค้นหา' : 'ยังไม่มี AI Tool'}
+                {searchTerm || filterPackage !== 'all' ? 'ไม่พบคอร์สที่ค้นหา' : 'ยังไม่มีคอร์สเรียน'}
               </h3>
               <p className="text-gray-600 mb-6">
                 {searchTerm || filterPackage !== 'all'
                   ? 'ลองเปลี่ยนคำค้นหาหรือตัวกรอง'
-                  : 'เริ่มสร้าง AI Tool แรกของคุณ'}
+                  : 'เริ่มสร้างคอร์สแรกของคุณ'}
               </p>
               {!searchTerm && filterPackage === 'all' && (
                 <Link
@@ -307,7 +307,7 @@ export default function AdminAIToolsPage() {
                   className="btn-primary inline-flex items-center gap-2"
                 >
                   <Plus className="w-5 h-5" />
-                  สร้าง AI Tool
+                  สร้างคอร์สเรียน
                 </Link>
               )}
             </div>
@@ -315,7 +315,7 @@ export default function AdminAIToolsPage() {
             <>
               {/* Results count */}
               <div className="mb-4 text-sm text-gray-600">
-                แสดง {filteredTools.length} จาก {tools.length} AI Tools
+                แสดง {filteredTools.length} จาก {tools.length} คอร์สเรียน
               </div>
 
               {/* Tools Grid */}
