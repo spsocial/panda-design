@@ -1,23 +1,26 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Palette } from 'lucide-react'
+import { FloatingContactButton } from '@/components/FloatingContactButton'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
+      <FloatingContactButton />
+
       {/* Navigation */}
       <nav className="bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               <Image
                 src="/panda-logo.avif"
                 alt="Panda Design Logo"
-                width={40}
-                height={40}
+                width={50}
+                height={50}
                 className="object-contain"
               />
-              <span className="text-xl font-bold bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">
                 PANDA DESIGN
               </span>
             </div>
@@ -43,9 +46,9 @@ export default function Home() {
             เรียนโฟโต้ช็อป ตัดต่อวิดีโอ และออกแบบกราฟิก ทั้งหมดในที่เดียว
           </p>
           <div className="flex gap-4 justify-center">
-            <Link href="/login" className="bg-white text-pink-500 px-8 py-3 rounded-lg font-bold hover:bg-pink-50 transition-colors text-lg">
-              ทดลองเรียนฟรี - เข้าสู่ระบบด้วย Google
-            </Link>
+            <a href="https://lin.ee/PEF8E2P" target="_blank" rel="noopener noreferrer" className="bg-white text-pink-500 px-8 py-3 rounded-lg font-bold hover:bg-pink-50 transition-colors text-lg">
+              ติดต่อสอบถาม / สมัครเรียน
+            </a>
           </div>
         </div>
       </section>
@@ -161,7 +164,7 @@ export default function Home() {
                   <span className="text-sm">วิเคราะห์ตลาด</span>
                 </li>
               </ul>
-              <Link href="/login" className="btn-primary w-full block text-center">เลือกคอร์สนี้</Link>
+              <a href="https://lin.ee/PEF8E2P" target="_blank" rel="noopener noreferrer" className="btn-primary w-full block text-center">เลือกคอร์สนี้</a>
             </div>
 
             {/* PREMIER PRO */}
@@ -186,7 +189,7 @@ export default function Home() {
                   <span className="text-sm">Motion Graphics</span>
                 </li>
               </ul>
-              <Link href="/login" className="btn-primary w-full block text-center">เลือกคอร์สนี้</Link>
+              <a href="https://lin.ee/PEF8E2P" target="_blank" rel="noopener noreferrer" className="btn-primary w-full block text-center">เลือกคอร์สนี้</a>
             </div>
 
             {/* GRAPHIC DESIGN 101 */}
@@ -213,7 +216,7 @@ export default function Home() {
                   <span className="text-sm">หลักการออกแบบ</span>
                 </li>
               </ul>
-              <Link href="/login" className="btn-primary w-full block text-center">เลือกคอร์สนี้</Link>
+              <a href="https://lin.ee/PEF8E2P" target="_blank" rel="noopener noreferrer" className="btn-primary w-full block text-center">เลือกคอร์สนี้</a>
             </div>
 
             {/* PACKAGE DESIGN */}
@@ -237,7 +240,7 @@ export default function Home() {
                   <span className="text-sm">Print Production</span>
                 </li>
               </ul>
-              <Link href="/login" className="btn-primary w-full block text-center">เลือกคอร์สนี้</Link>
+              <a href="https://lin.ee/PEF8E2P" target="_blank" rel="noopener noreferrer" className="btn-primary w-full block text-center">เลือกคอร์สนี้</a>
             </div>
           </div>
         </div>
@@ -246,15 +249,15 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex items-center justify-center gap-2 mb-4">
+          <div className="flex items-center justify-center gap-3 mb-4">
             <Image
               src="/panda-logo.avif"
               alt="Panda Design Logo"
-              width={32}
-              height={32}
+              width={40}
+              height={40}
               className="object-contain"
             />
-            <span className="text-xl font-bold">PANDA DESIGN</span>
+            <span className="text-2xl font-bold">PANDA DESIGN</span>
           </div>
           <p className="text-gray-400">
             © 2025 PANDA DESIGN. All rights reserved.

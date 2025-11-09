@@ -63,15 +63,15 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/dashboard" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+          <Link href="/dashboard" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
             <Image
               src="/panda-logo.avif"
               alt="Panda Design Logo"
-              width={40}
-              height={40}
+              width={50}
+              height={50}
               className="object-contain"
             />
-            <span className="text-xl font-bold bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">
               PANDA DESIGN
             </span>
           </Link>
